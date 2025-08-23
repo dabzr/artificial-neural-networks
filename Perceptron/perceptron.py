@@ -7,8 +7,7 @@ def dotproduct(x, w):
     return sum
 
 class Perceptron:
-    def __init__(self, dataset, weights=None, fixed_input=+1) -> None:
-        self.dataset = dataset
+    def __init__(self, weights=None, fixed_input=+1) -> None:
         self.model = weights
         self.fixed_input = fixed_input
 
@@ -18,11 +17,11 @@ class Perceptron:
             w[i] = w[i] + x[i]*y
         return w
 
-    def train(self, dimension, epochs, bias):
+    def train(self, dataset, dimension, epochs, bias):
         w = [bias] + [0]*dimension
         for _ in range(epochs):        
-            i = random.randint(0, len(self.dataset)-1)
-            x, y = self.dataset[i]
+            i = random.randint(0, len(dataset)-1)
+            x, y = dataset[i]
             x_aug = [self.fixed_input] + x
             xw = dotproduct(x_aug, w)
             if (xw >= 0 and y == -1) or (xw < 0 and y == 1):
@@ -36,8 +35,8 @@ class Perceptron:
         return -1
 
 def test(dataset):
-    neuron = Perceptron(dataset)
-    neuron.train(dimension=2, epochs=50, bias=0)
+    neuron = Perceptron()
+    neuron.train(dataset=dataset, dimension=2, epochs=50, bias=0)
     test_cases = [[1, 1], [1, 0], [0, 1], [0, 0]]
     for case in test_cases:
         print(f"{case}={neuron.predict(case)}")
