@@ -16,6 +16,6 @@ class SimpleRegressor:
 
 reg = SimpleRegressor()
 reg.model([(2,3), (3,5), (1,1)])
-print(reg.predict(3))
-print(reg.w0)
-print(reg.w1)
+#print(reg.predict(3))
+#print(reg.w0)
+#print(reg.w1)
